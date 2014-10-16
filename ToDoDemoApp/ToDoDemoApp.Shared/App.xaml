@@ -1,0 +1,15 @@
+﻿<!--<Application
+    x:Class="ToDoDemoApp.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ToDoDemoApp">
+
+</Application>-->
+<micro:CaliburnApplication
+    x:Class="ToDoDemoApp.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ToDoDemoApp"
+    xmlns:micro="using:Caliburn.Micro">
+
+</micro:CaliburnApplication>

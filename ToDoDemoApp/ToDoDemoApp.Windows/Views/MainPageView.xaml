@@ -1,0 +1,48 @@
+﻿<Page
+    x:Class="ToDoDemoApp.Views.MainPageView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ToDoDemoApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:micro="using:Caliburn.Micro"    
+    xmlns:viewModels="using:ToDoDemoApp.ViewModels"
+    d:DataContext="{d:DesignInstance Type=viewModels:MainPageViewModel, IsDesignTimeCreatable=True}"
+    micro:Bind.AtDesignTime="True"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" HorizontalAlignment="Left"  Text="TO DO Demo" Style="{StaticResource HeaderTextBlockStyle}" Margin="150,150,0,50"/>
+        <ListView Grid.Row="1" ItemsSource="{Binding ToDoItems}" Margin="150,0,450,100" 
+                  ScrollViewer.VerticalScrollMode="Auto"                  
+                  IsItemClickEnabled="True"
+                  SelectionMode="None"
+                  micro:Message.Attach="[Event ItemClick] = [Action GoToDetail($clickeditem)]">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="{Binding ToDoHeader}" Style="{StaticResource TitleTextBlockStyle}" />
+                        <TextBlock Text="{Binding DoUntilDate}" Style="{StaticResource CaptionTextBlockStyle}" />
+                        <TextBlock Text="{Binding Description}" Style="{StaticResource BodyTextBlockStyle}" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </Grid>
+    <Page.BottomAppBar>
+        <CommandBar>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Label="about" Icon="Admin"/>
+            </CommandBar.SecondaryCommands>
+            <AppBarButton Label="Add" Icon="Add"/>            
+            <AppBarSeparator VerticalContentAlignment="Stretch" />
+            <AppBarButton Label="Done!" Icon="Accept" />
+            <AppBarButton Label="Cancel" Icon="Remove"/>            
+        </CommandBar>
+    </Page.BottomAppBar>
+</Page>
