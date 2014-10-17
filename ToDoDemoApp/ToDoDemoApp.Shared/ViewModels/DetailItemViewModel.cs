@@ -70,21 +70,23 @@ namespace ToDoDemoApp.ViewModels
             return _navigationService.CanGoBack;
         }
 
-        public void AddOrUpdate()
-        {
-            if (Parameter == null && BtnContent == "Add")
-            {
-                var mainVM = _container.GetInstance<MainPageViewModel>();
-                mainVM.ToDoItems.Add(ToDoItem);
-            }
-        }
+    // DO poprawienia
 
-        public bool CanAddOrUpdate()
-        {
-            if (Parameter == null && BtnContent == "Add")
-                return true;
-            else                
-                return false;
-        }
-    }
+    //    public void AddOrUpdate()
+    //    {
+    //        if (Parameter == null && BtnContent == "Add")
+    //        {
+    //            var mainVM = _container.GetInstance<MainPageViewModel>();
+    //            mainVM.ToDoItems.Add(ToDoItem);
+    //        }
+    //    }
+
+    //    public bool CanAddOrUpdate()
+    //    {
+    //        if (Parameter == null && BtnContent == "Add")
+    //            return true;
+    //        else                
+    //            return false;
+    //    }
+    //}
 }
