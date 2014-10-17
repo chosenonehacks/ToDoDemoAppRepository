@@ -16,6 +16,13 @@ namespace ToDoDemoApp.ViewModels
         public MainPageViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
+
+            ToDoItems = new ObservableCollection<ToDoItem>
+                {
+                    new ToDoItem {ToDoHeader = "Części do samochodu", Description = "Amortyzator przedni, sprężyna wachacza", DoUntilDate = new DateTime(2014,10,18)},
+                    new ToDoItem {ToDoHeader = "Przygotować się na rozmowę", Description = "Poczytac o technologiach, zapoznać się z firmą", DoUntilDate = new DateTime(2014,10,21)},
+                    new ToDoItem {ToDoHeader = "MOUT z kumplami", Description = "Skontaktować się z Szpakiem", DoUntilDate = new DateTime(2014,10,17)}
+                };
         }
 
         //For DesingData
@@ -44,21 +51,37 @@ namespace ToDoDemoApp.ViewModels
                 NotifyOfPropertyChange(() => ToDoItems);
             }
         }
+
+        //private ToDoItem _selectedToDoItem;
+
+        //public ToDoItem SelectedToDoItem
+        //{
+        //    get { return _selectedToDoItem; }
+        //    set
+        //    {
+        //        _selectedToDoItem = value;
+        //        NotifyOfPropertyChange(() => SelectedToDoItem);
+        //    }
+        //}
         
         protected override void OnActivate()
         {
-            ToDoItems = new ObservableCollection<ToDoItem>
-            {
-                new ToDoItem {ToDoHeader = "Części do samochodu", Description = "Amortyzator przedni, sprężyna wachacza", DoUntilDate = new DateTime(2014,10,18)},
-                new ToDoItem {ToDoHeader = "Przygotować się na rozmowę", Description = "Poczytac o technologiach, zapoznać się z firmą", DoUntilDate = new DateTime(2014,10,21)},
-                new ToDoItem {ToDoHeader = "MOUT z kumplami", Description = "Skontaktować się z Szpakiem", DoUntilDate = new DateTime(2014,10,17)}
-            };
+                            
         }
 
         public void GoToDetail(ToDoItem selectedToDoItem)
         {
-            //ToDoItem selectedToDoItem = selectedToDoItem.ClickedItem as ToDoItem;
             _navigationService.NavigateToViewModel<DetailItemViewModel>(selectedToDoItem);
+        }
+
+        public void AddNew()
+        {
+            _navigationService.NavigateToViewModel<DetailItemViewModel>();
+        }
+
+        public void Edit()
+        {
+            //_navigationService.NavigateToViewModel<DetailItemViewModel>(SelectedToDoItem);
         }
     }
 }

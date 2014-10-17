@@ -5,9 +5,42 @@
     xmlns:local="using:ToDoDemoApp.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Converters="using:ToDoDemoApp.Converters"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <Converters:DateTimeToDateTimeOffsetConverter x:Key="DateTimeToDateTimeOffsetConverter"/>
+    </Page.Resources>
+
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBlock Text="{Binding ToDoItem.ToDoHeader}"/>
+        
+     <Grid  HorizontalAlignment="Center" VerticalAlignment="Center">
+    	<Grid.RowDefinitions>
+    		<RowDefinition Height="Auto"/>
+    		<RowDefinition Height="*"/>
+    		<RowDefinition Height="Auto"/>
+    	</Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Vertical" >
+                <Button x:Name="GoBack" Content="Back" Style="{StaticResource NavigationBackButtonNormalStyle}" Margin="0,0,0,50"/>
+                <TextBlock Text="TO DO Item Demo App" Style="{StaticResource HeaderTextBlockStyle}"  />
+    		<TextBlock Text="Details Page" Style="{StaticResource SubheaderTextBlockStyle}"  />
+    	</StackPanel>
+        <Grid Grid.Row="1" Margin="20,20,0,0">
+		    <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto" MinWidth="350" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBox MinWidth="300" Header="TO DO:" Grid.Row="0" Grid.Column="1" Text="{Binding ToDoItem.ToDoHeader, Mode=TwoWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <DatePicker Header="Do unil:" Grid.Row="1" Date="{Binding ToDoItem.DoUntilDate, Converter={StaticResource DateTimeToDateTimeOffsetConverter}, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"  />                
+                <TextBox MinWidth="300" MinHeight="200" Header="Description:" TextWrapping="Wrap" Grid.Row="2" Grid.Column="1" Text="{Binding ToDoItem.Description, Mode=TwoWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <Button x:Name="AddOrUpdate" Grid.Column="1" Grid.Row="3" Content="{Binding BtnContent}" HorizontalAlignment="Left" MinWidth="100"/>
+            </Grid>
+     </Grid>
     </Grid>
 </Page>

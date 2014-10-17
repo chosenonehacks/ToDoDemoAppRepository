@@ -16,18 +16,18 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" HorizontalAlignment="Left"  Text="TO DO Demo" Style="{StaticResource HeaderTextBlockStyle}" Margin="150,150,0,50"/>
+        <TextBlock Grid.Row="0" HorizontalAlignment="Left"  Text="TO DO Demo App" Style="{StaticResource HeaderTextBlockStyle}" Margin="150,150,0,50"/>
         <ListView Grid.Row="1" ItemsSource="{Binding ToDoItems}" Margin="150,0,450,100" 
                   ScrollViewer.VerticalScrollMode="Auto"                  
-                  IsItemClickEnabled="True"
+                  IsItemClickEnabled="True"                  
                   SelectionMode="None"
                   micro:Message.Attach="[Event ItemClick] = [Action GoToDetail($clickeditem)]">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
-                        <TextBlock Text="{Binding ToDoHeader}" Style="{StaticResource TitleTextBlockStyle}" />
-                        <TextBlock Text="{Binding DoUntilDate}" Style="{StaticResource CaptionTextBlockStyle}" />
-                        <TextBlock Text="{Binding Description}" Style="{StaticResource BodyTextBlockStyle}" TextWrapping="Wrap"/>
+                        <TextBlock Text="{Binding ToDoHeader, Mode=TwoWay}" Style="{StaticResource TitleTextBlockStyle}" />
+                        <TextBlock Text="{Binding DoUntilDate, Mode=TwoWay}" Style="{StaticResource CaptionTextBlockStyle}" />
+                        <TextBlock Text="{Binding Description, Mode=TwoWay}" Style="{StaticResource BodyTextBlockStyle}" TextWrapping="Wrap"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
@@ -35,11 +35,11 @@
 
     </Grid>
     <Page.BottomAppBar>
-        <CommandBar>
+        <CommandBar IsOpen="True">
             <CommandBar.SecondaryCommands>
                 <AppBarButton Label="about" Icon="Admin"/>
             </CommandBar.SecondaryCommands>
-            <AppBarButton Label="Add" Icon="Add"/>            
+            <AppBarButton x:Name="AddNew" Label="Add" Icon="Add"/>
             <AppBarSeparator VerticalContentAlignment="Stretch" />
             <AppBarButton Label="Done!" Icon="Accept" />
             <AppBarButton Label="Cancel" Icon="Remove"/>            

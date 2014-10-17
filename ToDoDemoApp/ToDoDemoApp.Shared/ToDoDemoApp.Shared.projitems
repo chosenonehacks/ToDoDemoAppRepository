@@ -15,6 +15,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\DateTimeToDateTimeOffsetConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\ToDoItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\DetailItemViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MainPageViewModel.cs" />

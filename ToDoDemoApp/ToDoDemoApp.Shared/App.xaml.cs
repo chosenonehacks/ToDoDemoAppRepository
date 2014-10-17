@@ -41,7 +41,8 @@ namespace ToDoDemoApp
             container.RegisterWinRTServices();
 
             //TODO: Register your view models at the container
-            container.PerRequest<MainPageViewModel>();
+            container.Singleton<MainPageViewModel>();
+            //container.PerRequest<MainPageViewModel>();
             container.PerRequest<DetailItemViewModel>();
             MessageBinder.SpecialValues.Add("$clickeditem", c => ((ItemClickEventArgs)c.EventArgs).ClickedItem);
         }
