@@ -37,12 +37,9 @@
     <Page.BottomAppBar>
         <CommandBar IsOpen="True">
             <CommandBar.SecondaryCommands>
-                <AppBarButton Label="about" Icon="Admin"/>
+                <AppBarButton Label="About" Icon="Admin"/>
             </CommandBar.SecondaryCommands>
-            <AppBarButton x:Name="AddNew" Label="Add" Icon="Add"/>
-            <AppBarSeparator VerticalContentAlignment="Stretch" />
-            <AppBarButton Label="Done!" Icon="Accept" />
-            <AppBarButton Label="Cancel" Icon="Remove"/>            
+            <AppBarButton x:Name="AddNew" Label="Add" Icon="Add"/>    
         </CommandBar>
     </Page.BottomAppBar>
 </Page>

@@ -36,11 +36,14 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <TextBox MinWidth="300" Header="TO DO:" Grid.Row="0" Grid.Column="1" Text="{Binding ToDoItem.ToDoHeader, Mode=TwoWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                <DatePicker Header="Do unil:" Grid.Row="1" Date="{Binding ToDoItem.DoUntilDate, Converter={StaticResource DateTimeToDateTimeOffsetConverter}, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"  />                
-                <TextBox MinWidth="300" MinHeight="200" Header="Description:" TextWrapping="Wrap" Grid.Row="2" Grid.Column="1" Text="{Binding ToDoItem.Description, Mode=TwoWay}" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                <Button x:Name="AddOrUpdate" Grid.Column="1" Grid.Row="3" Content="{Binding BtnContent}" HorizontalAlignment="Left" MinWidth="100"/>
+                <TextBox MinWidth="300" Header="TO DO:" Grid.Row="0" Grid.Column="1" x:Name="ToDoHeader" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <DatePicker Header="Do unil:" Grid.Row="1" Date="{Binding DoUntilDate, Converter={StaticResource DateTimeToDateTimeOffsetConverter}, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"  />
+                <TextBox MinWidth="300" MinHeight="200" Header="Description:" TextWrapping="Wrap" Grid.Row="2" Grid.Column="1" x:Name="Description" HorizontalAlignment="Left" VerticalAlignment="Center" />
+                <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Horizontal">
+                        <Button x:Name="Save"  Content="Save" HorizontalAlignment="Left" MinWidth="100"/>
+                        <Button x:Name="Delete" Grid.Row="3" Content="Delete" HorizontalAlignment="Left" MinWidth="100"/>        
+                </StackPanel>
             </Grid>
-     </Grid>
+        </Grid>
     </Grid>
 </Page>

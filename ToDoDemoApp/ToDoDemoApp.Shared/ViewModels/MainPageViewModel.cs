@@ -19,9 +19,9 @@ namespace ToDoDemoApp.ViewModels
 
             ToDoItems = new ObservableCollection<ToDoItem>
                 {
-                    new ToDoItem {ToDoHeader = "Części do samochodu", Description = "Amortyzator przedni, sprężyna wachacza", DoUntilDate = new DateTime(2014,10,18)},
-                    new ToDoItem {ToDoHeader = "Przygotować się na rozmowę", Description = "Poczytac o technologiach, zapoznać się z firmą", DoUntilDate = new DateTime(2014,10,21)},
-                    new ToDoItem {ToDoHeader = "MOUT z kumplami", Description = "Skontaktować się z Szpakiem", DoUntilDate = new DateTime(2014,10,17)}
+                    new ToDoItem {Id = 1, ToDoHeader = "Części do samochodu", Description = "Amortyzator przedni, sprężyna wachacza", DoUntilDate = new DateTime(2014,10,18)},
+                    new ToDoItem {Id = 2,ToDoHeader = "Przygotować się na rozmowę", Description = "Poczytac o technologiach, zapoznać się z firmą", DoUntilDate = new DateTime(2014,10,21)},
+                    new ToDoItem {Id = 3,ToDoHeader = "MOUT z kumplami", Description = "Skontaktować się z Szpakiem", DoUntilDate = new DateTime(2014,10,17)}
                 };
         }
 
@@ -52,17 +52,7 @@ namespace ToDoDemoApp.ViewModels
             }
         }
 
-        //private ToDoItem _selectedToDoItem;
-
-        //public ToDoItem SelectedToDoItem
-        //{
-        //    get { return _selectedToDoItem; }
-        //    set
-        //    {
-        //        _selectedToDoItem = value;
-        //        NotifyOfPropertyChange(() => SelectedToDoItem);
-        //    }
-        //}
+        
         
         protected override void OnActivate()
         {
@@ -77,11 +67,6 @@ namespace ToDoDemoApp.ViewModels
         public void AddNew()
         {
             _navigationService.NavigateToViewModel<DetailItemViewModel>();
-        }
-
-        public void Edit()
-        {
-            //_navigationService.NavigateToViewModel<DetailItemViewModel>(SelectedToDoItem);
         }
     }
 }

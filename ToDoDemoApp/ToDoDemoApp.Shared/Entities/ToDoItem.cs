@@ -5,84 +5,90 @@ using System.Text;
 
 namespace ToDoDemoApp.Entities
 {
-    public class ToDoItem : PropertyChangedBase
+    public class ToDoItem 
     {
 
         public ToDoItem()
         {
-            this.Id = 0;
-            this.IsDone = false;
+            this.Id = 0;            
+            this.DoUntilDate = DateTime.Now;
         }
 
-        private int _id;
-        public int Id
-        {
-            get
-            {
-                return _id;
-            }
-            set
-            {
-                _id = value;
-                NotifyOfPropertyChange(() => Id);
-            }
-        }
+        public int Id { get; set; }
+        public string ToDoHeader { get; set; }
+        public DateTime? DoUntilDate { get; set; }
+        public string Description { get; set; }
+        
 
-        private string _toDoHeader;
-        public string ToDoHeader
-        {
-            get
-            {
-                return _toDoHeader;
-            }
-            set
-            {
-                _toDoHeader = value;
-                NotifyOfPropertyChange(() => ToDoHeader);
-            }
-        }
+        //private int _id;
+        //public int Id
+        //{
+        //    get
+        //    {
+        //        return _id;
+        //    }
+        //    set
+        //    {
+        //        _id = value;
+        //        NotifyOfPropertyChange(() => Id);
+        //    }
+        //}
 
-        private DateTime? _doUntilDate;
-        public DateTime? DoUntilDate
-        {
-            get
-            {
-                return _doUntilDate;
-            }
-            set
-            {
-                _doUntilDate = value;
-                NotifyOfPropertyChange(() => DoUntilDate);
-            }
-        }
+        //private string _toDoHeader;
+        //public string ToDoHeader
+        //{
+        //    get
+        //    {
+        //        return _toDoHeader;
+        //    }
+        //    set
+        //    {
+        //        _toDoHeader = value;
+        //        NotifyOfPropertyChange(() => ToDoHeader);
+        //    }
+        //}
 
-        private string _description;
-        public string Description
-        {
-            get
-            {
-                return _description;
-            }
-            set
-            {
-                _description = value;
-                NotifyOfPropertyChange(() => Description);
-            }
-        }
+        //private DateTime? _doUntilDate;
+        //public DateTime? DoUntilDate
+        //{
+        //    get
+        //    {
+        //        return _doUntilDate;
+        //    }
+        //    set
+        //    {
+        //        _doUntilDate = value;
+        //        NotifyOfPropertyChange(() => DoUntilDate);
+        //    }
+        //}
 
-        private bool _isDone;
-        public bool IsDone
-        {
-            get
-            {
-                return _isDone;
-            }
-            set
-            {
-                _isDone = value;
-                NotifyOfPropertyChange(() => IsDone);
-            }
-        }
+        //private string _description;
+        //public string Description
+        //{
+        //    get
+        //    {
+        //        return _description;
+        //    }
+        //    set
+        //    {
+        //        _description = value;
+        //        NotifyOfPropertyChange(() => Description);
+        //    }
+        //}
+
+        //private bool _isDone;
+        //public bool IsDone
+        //{
+        //    get
+        //    {
+        //        return _isDone;
+        //    }
+        //    set
+        //    {
+        //        _isDone = value;
+        //        NotifyOfPropertyChange(() => IsDone);
+        //    }
+        //}
         
     }
 }

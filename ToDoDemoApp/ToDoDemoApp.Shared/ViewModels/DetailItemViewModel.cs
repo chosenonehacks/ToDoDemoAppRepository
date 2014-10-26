@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using ToDoDemoApp.Entities;
+using System.Linq;
 
 namespace ToDoDemoApp.ViewModels
 {
@@ -19,74 +20,145 @@ namespace ToDoDemoApp.ViewModels
         }
 
         public ToDoItem Parameter { get; set; }
+                
 
-        private ToDoItem toDoItem;
-
-        public ToDoItem ToDoItem
+        private int _id;
+        public int Id
         {
-            get { return toDoItem; }
+            get
+            {
+                return _id;
+            }
             set
             {
-                toDoItem = value;
-                NotifyOfPropertyChange(() => ToDoItem);
+                _id = value;
+                NotifyOfPropertyChange(() => Id);
             }
         }
 
-        private string btnContent;
-
-        public string BtnContent
+        private string _toDoHeader;
+        public string ToDoHeader
         {
-            get { return btnContent; }
+            get
+            {
+                return _toDoHeader;
+            }
             set
             {
-                btnContent = value;
-                NotifyOfPropertyChange(() => BtnContent);
+                _toDoHeader = value;
+                NotifyOfPropertyChange(() => ToDoHeader);
+                NotifyOfPropertyChange(() => CanSave);
             }
         }
+
+        private DateTime? _doUntilDate;
+        public DateTime? DoUntilDate
+        {
+            get
+            {
+                return _doUntilDate;
+            }
+            set
+            {
+                _doUntilDate = value;
+                NotifyOfPropertyChange(() => DoUntilDate);
+            }
+        }
+
+        private string _description;
+        public string Description
+        {
+            get
+            {
+                return _description;
+            }
+            set
+            {
+                _description = value;
+                NotifyOfPropertyChange(() => Description);
+            }
+        }       
 
         protected override void OnActivate()
         {
             if (Parameter != null)
             {
-                ToDoItem = Parameter;
-                BtnContent = "Update";
+                this.Id = Parameter.Id;
+                this.ToDoHeader = Parameter.ToDoHeader;
+                this.DoUntilDate = Parameter.DoUntilDate;
+                this.Description = Parameter.Description;
+                
             }
             else
             {
-                ToDoItem = new ToDoItem();                
-                ToDoItem.DoUntilDate = DateTime.Now;
-                BtnContent = "Add";
-
+                this.DoUntilDate = DateTime.Now;
             }
         }
 
-        public void GoBack(ToDoItem selectedToDoItem)
+        public void GoBack()
         {            
                 _navigationService.GoBack();            
         }
 
-        public bool CanGoBack(ToDoItem selectedToDoItem)
+        public bool CanGoBack()
         {
             return _navigationService.CanGoBack;
         }
+           
+        public void Save()
+        {
+            var mainVM = _container.GetInstance<MainPageViewModel>();
 
-    // DO poprawienia
+            if (Parameter == null)
+            {
+                ToDoItem _toDoItem = new ToDoItem();
+                _toDoItem.ToDoHeader = this.ToDoHeader;
+                _toDoItem.DoUntilDate = this.DoUntilDate;
+                _toDoItem.Description = this.Description;
 
-    //    public void AddOrUpdate()
-    //    {
-    //        if (Parameter == null && BtnContent == "Add")
-    //        {
-    //            var mainVM = _container.GetInstance<MainPageViewModel>();
-    //            mainVM.ToDoItems.Add(ToDoItem);
-    //        }
-    //    }
+                mainVM.ToDoItems.Add(_toDoItem);             
+            }
+            else
+            {
+                var toDoItemToUpdate = mainVM.ToDoItems.FirstOrDefault(a => a.Id == this.Parameter.Id);
+                if(toDoItemToUpdate != null)
+                {
+                    toDoItemToUpdate.ToDoHeader = this.ToDoHeader;
+                    toDoItemToUpdate.DoUntilDate = this.DoUntilDate;
+                    toDoItemToUpdate.Description = this.Description;
+                }
 
-    //    public bool CanAddOrUpdate()
-    //    {
-    //        if (Parameter == null && BtnContent == "Add")
-    //            return true;
-    //        else                
-    //            return false;
-    //    }
-    //}
+            }
+            _navigationService.GoBack();
+        }
+
+        public bool CanSave
+        {
+            get { return !String.IsNullOrWhiteSpace(this.ToDoHeader); }
+        }
+
+        public void Delete()
+        {
+            var mainVM = _container.GetInstance<MainPageViewModel>();
+
+            var toDoItemToDelete = mainVM.ToDoItems.FirstOrDefault(a => a.Id == this.Parameter.Id);
+                if (toDoItemToDelete != null)
+                {
+                    mainVM.ToDoItems.Remove(toDoItemToDelete);
+                }
+                        
+            _navigationService.GoBack();
+        }
+
+        public bool CanDelete
+        {
+            get
+            {
+                if (Parameter != null)
+                    return true;
+                else
+                    return false;
+            }
+        }
+    }
 }
