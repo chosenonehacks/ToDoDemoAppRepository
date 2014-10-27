@@ -2,8 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using ToDoDemoApp.Entities;
 using System.Linq;
+using ToDoDemoApp.DataAccessLayer;
+using ToDoDemoApp.Data_Access_Layer;
 
 namespace ToDoDemoApp.ViewModels
 {
@@ -87,7 +88,6 @@ namespace ToDoDemoApp.ViewModels
                 this.ToDoHeader = Parameter.ToDoHeader;
                 this.DoUntilDate = Parameter.DoUntilDate;
                 this.Description = Parameter.Description;
-                
             }
             else
             {
@@ -116,7 +116,10 @@ namespace ToDoDemoApp.ViewModels
                 _toDoItem.DoUntilDate = this.DoUntilDate;
                 _toDoItem.Description = this.Description;
 
-                mainVM.ToDoItems.Add(_toDoItem);             
+                mainVM.ToDoItems.Add(_toDoItem);           
+
+
+                Dal.SaveToDoItem(_toDoItem);
             }
             else
             {
@@ -126,9 +129,13 @@ namespace ToDoDemoApp.ViewModels
                     toDoItemToUpdate.ToDoHeader = this.ToDoHeader;
                     toDoItemToUpdate.DoUntilDate = this.DoUntilDate;
                     toDoItemToUpdate.Description = this.Description;
+                    Dal.SaveToDoItem(toDoItemToUpdate);
                 }
 
             }
+            mainVM.ToDoItems = null;
+            mainVM.ToDoItems = Dal.GetAllToDoItems();
+
             _navigationService.GoBack();
         }
 
@@ -145,7 +152,10 @@ namespace ToDoDemoApp.ViewModels
                 if (toDoItemToDelete != null)
                 {
                     mainVM.ToDoItems.Remove(toDoItemToDelete);
+                    Dal.DeleteToDoItem(toDoItemToDelete);
                 }
+                mainVM.ToDoItems = null;
+                mainVM.ToDoItems = Dal.GetAllToDoItems();
                         
             _navigationService.GoBack();
         }

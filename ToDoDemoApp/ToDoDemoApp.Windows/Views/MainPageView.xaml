@@ -11,13 +11,13 @@
     micro:Bind.AtDesignTime="True"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" VerticalAlignment="Stretch"  >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" HorizontalAlignment="Left"  Text="TO DO Demo App" Style="{StaticResource HeaderTextBlockStyle}" Margin="150,150,0,50"/>
-        <ListView Grid.Row="1" ItemsSource="{Binding ToDoItems}" Margin="150,0,450,100" 
+        <TextBlock Grid.Row="0" HorizontalAlignment="Left"  Text="TO DO Demo App" Style="{StaticResource HeaderTextBlockStyle}" />
+        <ListView Grid.Row="1" ItemsSource="{Binding ToDoItems}"  
                   ScrollViewer.VerticalScrollMode="Auto"                  
                   IsItemClickEnabled="True"                  
                   SelectionMode="None"
@@ -37,9 +37,9 @@
     <Page.BottomAppBar>
         <CommandBar IsOpen="True">
             <CommandBar.SecondaryCommands>
-                <AppBarButton Label="About" Icon="Admin"/>
+                <AppBarButton x:Name="About" Label="About" Icon="Admin"/>
             </CommandBar.SecondaryCommands>
-            <AppBarButton x:Name="AddNew" Label="Add" Icon="Add"/>    
+            <AppBarButton x:Name="AddNew" Label="Add" Icon="Add"/>
         </CommandBar>
     </Page.BottomAppBar>
 </Page>
