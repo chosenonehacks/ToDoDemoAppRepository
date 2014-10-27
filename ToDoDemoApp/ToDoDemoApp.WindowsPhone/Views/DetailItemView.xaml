@@ -6,51 +6,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-    xmlns:Converters="using:ToDoDemoApp.Converters">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Page.Resources>
-        <Converters:DateTimeToDateTimeOffsetConverter x:Key="DateTimeToDateTimeOffsetConverter"/>
-    </Page.Resources>
+    <Grid>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-        <Grid  HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Orientation="Vertical" >
-
-                <TextBlock Text="TO DO Item Demo App" Style="{StaticResource SubheaderTextBlockStyle}"  />
-                <TextBlock Text="Details Page" Style="{StaticResource SubheaderTextBlockStyle}"  />
-            </StackPanel>
-            <Grid Grid.Row="1" >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto" MinWidth="350" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-                <TextBox MinWidth="300" Header="TO DO:" Grid.Row="0" Grid.Column="1" x:Name="ToDoHeader" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                <DatePicker Header="Do unil:" Grid.Row="1" Date="{Binding DoUntilDate, Converter={StaticResource DateTimeToDateTimeOffsetConverter}, Mode=TwoWay}" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center"  />
-                <TextBox MinWidth="300" MinHeight="200" Header="Description:" TextWrapping="Wrap" Grid.Row="2" Grid.Column="1" x:Name="Description" HorizontalAlignment="Left" VerticalAlignment="Center" />
-                
-            </Grid>
-        </Grid>
     </Grid>
-    <Page.BottomAppBar>
-        <CommandBar IsOpen="True">
-            <CommandBar.SecondaryCommands>
-                <AppBarButton x:Name="About" Label="About" Icon="Admin"/>
-            </CommandBar.SecondaryCommands>
-            <AppBarButton x:Name="Save" Label="Add" Icon="Save"/>
-            <AppBarButton x:Name="Delete" Label="Add" Icon="Delete"/>
-        </CommandBar>
-    </Page.BottomAppBar>
 </Page>

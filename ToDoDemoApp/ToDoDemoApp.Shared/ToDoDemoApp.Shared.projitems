@@ -16,10 +16,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Converters\DateTimeToDateTimeOffsetConverter.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Data Access Layer\Dal.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Data Access Layer\SQLite.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Data Access Layer\SQLiteAsync.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Data Access Layer\ToDoItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\ToDoItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\DetailItemViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MainPageViewModel.cs" />
   </ItemGroup>

@@ -3,8 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
-using ToDoDemoApp.Data_Access_Layer;
-using ToDoDemoApp.DataAccessLayer;
+using ToDoDemoApp.Entities;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
 
@@ -17,9 +16,13 @@ namespace ToDoDemoApp.ViewModels
         public MainPageViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
-                        
-            Dal.CreateDatabase();
-            ToDoItems = Dal.GetAllToDoItems();            
+
+            ToDoItems = new ObservableCollection<ToDoItem>
+                {
+                    new ToDoItem {Id = 1, ToDoHeader = "Części do samochodu", Description = "Amortyzator przedni, sprężyna wachacza", DoUntilDate = new DateTime(2014,10,18)},
+                    new ToDoItem {Id = 2,ToDoHeader = "Przygotować się na rozmowę", Description = "Poczytac o technologiach, zapoznać się z firmą", DoUntilDate = new DateTime(2014,10,21)},
+                    new ToDoItem {Id = 3,ToDoHeader = "MOUT z kumplami", Description = "Skontaktować się z Szpakiem", DoUntilDate = new DateTime(2014,10,17)}
+                };
         }
 
         //For DesingData
@@ -27,17 +30,19 @@ namespace ToDoDemoApp.ViewModels
         {
             if (Execute.InDesignMode)
             {
-                ToDoItems = new List<ToDoItem>();
-                ToDoItems.Add(new ToDoItem {ToDoHeader = "To Do Item 1", Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a, scelerisque sed, lacinia in, mi. Cras vel lorem. Etiam pellentesque aliquet tellus.", DoUntilDate = DateTime.Now});
-                ToDoItems.Add(new ToDoItem {ToDoHeader = "To Do Item 2", Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a, scelerisque sed, lacinia in, mi. Cras vel lorem. Etiam pellentesque aliquet tellus.", DoUntilDate = DateTime.Now});
-                ToDoItems.Add(new ToDoItem {ToDoHeader = "To Do Item 2", Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a, scelerisque sed, lacinia in, mi. Cras vel lorem. Etiam pellentesque aliquet tellus.", DoUntilDate = DateTime.Now});
-                ToDoItems.Add(new ToDoItem {ToDoHeader = "To Do Item 3", Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a, scelerisque sed, lacinia in, mi. Cras vel lorem. Etiam pellentesque aliquet tellus.", DoUntilDate = DateTime.Now});                
+                ToDoItems = new ObservableCollection<ToDoItem>
+                {
+                    new ToDoItem {ToDoHeader = "To Do Item 1", Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a, scelerisque sed, lacinia in, mi. Cras vel lorem. Etiam pellentesque aliquet tellus.", DoUntilDate = DateTime.Now},
+                    new ToDoItem {ToDoHeader = "To Do Item 2", Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a, scelerisque sed, lacinia in, mi. Cras vel lorem. Etiam pellentesque aliquet tellus.", DoUntilDate = DateTime.Now},
+                    new ToDoItem {ToDoHeader = "To Do Item 3", Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a, scelerisque sed, lacinia in, mi. Cras vel lorem. Etiam pellentesque aliquet tellus.", DoUntilDate = DateTime.Now},
+                    new ToDoItem {ToDoHeader = "To Do Item 4", Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a, scelerisque sed, lacinia in, mi. Cras vel lorem. Etiam pellentesque aliquet tellus.", DoUntilDate = DateTime.Now},                    
+                };
             }
         }
 
-        private List<ToDoItem> toDoItem;
+        private ObservableCollection<ToDoItem> toDoItem;
 
-        public List<ToDoItem> ToDoItems
+        public ObservableCollection<ToDoItem> ToDoItems
         {
             get { return toDoItem; }
             set
@@ -47,15 +52,11 @@ namespace ToDoDemoApp.ViewModels
             }
         }
 
-        public async void About()
-        {
-            MessageDialog dialog = new MessageDialog("Aplikacja napisana w celu nauki frameworka MVVM Caliburn.Micro oraz bazy SQLite w aplikacjach uniwersalnych");
-            await dialog.ShowAsync();
-        }
+        
         
         protected override void OnActivate()
         {
-                           
+                            
         }
 
         public void GoToDetail(ToDoItem selectedToDoItem)
