@@ -17,6 +17,7 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Converters\DateTimeToDateTimeOffsetConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Data Access Layer\Dal.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data Access Layer\DalAsync.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Data Access Layer\SQLite.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Data Access Layer\SQLiteAsync.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Data Access Layer\ToDoItem.cs" />

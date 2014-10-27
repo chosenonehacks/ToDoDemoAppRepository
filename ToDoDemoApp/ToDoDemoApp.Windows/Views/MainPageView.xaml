@@ -17,7 +17,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" HorizontalAlignment="Left"  Text="TO DO Demo App" Style="{StaticResource HeaderTextBlockStyle}" />
-        <ListView Grid.Row="1" ItemsSource="{Binding ToDoItems}"  
+        <ListView Grid.Row="1" ItemsSource="{Binding ToDoItemsList}"  
                   ScrollViewer.VerticalScrollMode="Auto"                  
                   IsItemClickEnabled="True"                  
                   SelectionMode="None"

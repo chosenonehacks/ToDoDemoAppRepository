@@ -17,9 +17,19 @@ namespace ToDoDemoApp.ViewModels
         public MainPageViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
-                        
-            Dal.CreateDatabase();
-            ToDoItems = Dal.GetAllToDoItems();            
+
+            InitializeDB();
+            //DalAsync.StartDBOperationsAsync();
+            //Dal.CreateDatabase();
+            //ToDoItems = Dal.GetAllToDoItems();            
+            
+        }
+
+        private async void InitializeDB()
+        {
+            await DalAsync.StartDBOperationsAsync();
+            DalAsync dalAsync = new DalAsync();
+            ToDoItemsList = await dalAsync.GetAllToDoItemsAsync(); 
         }
 
         //For DesingData
@@ -27,23 +37,23 @@ namespace ToDoDemoApp.ViewModels
         {
             if (Execute.InDesignMode)
             {
-                ToDoItems = new List<ToDoItem>();
-                ToDoItems.Add(new ToDoItem {ToDoHeader = "To Do Item 1", Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a, scelerisque sed, lacinia in, mi. Cras vel lorem. Etiam pellentesque aliquet tellus.", DoUntilDate = DateTime.Now});
-                ToDoItems.Add(new ToDoItem {ToDoHeader = "To Do Item 2", Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a, scelerisque sed, lacinia in, mi. Cras vel lorem. Etiam pellentesque aliquet tellus.", DoUntilDate = DateTime.Now});
-                ToDoItems.Add(new ToDoItem {ToDoHeader = "To Do Item 2", Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a, scelerisque sed, lacinia in, mi. Cras vel lorem. Etiam pellentesque aliquet tellus.", DoUntilDate = DateTime.Now});
-                ToDoItems.Add(new ToDoItem {ToDoHeader = "To Do Item 3", Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a, scelerisque sed, lacinia in, mi. Cras vel lorem. Etiam pellentesque aliquet tellus.", DoUntilDate = DateTime.Now});                
+                ToDoItemsList = new List<ToDoItem>();
+                ToDoItemsList.Add(new ToDoItem {ToDoHeader = "To Do Item 1", Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a, scelerisque sed, lacinia in, mi. Cras vel lorem. Etiam pellentesque aliquet tellus.", DoUntilDate = DateTime.Now});
+                ToDoItemsList.Add(new ToDoItem {ToDoHeader = "To Do Item 2", Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a, scelerisque sed, lacinia in, mi. Cras vel lorem. Etiam pellentesque aliquet tellus.", DoUntilDate = DateTime.Now});
+                ToDoItemsList.Add(new ToDoItem {ToDoHeader = "To Do Item 2", Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a, scelerisque sed, lacinia in, mi. Cras vel lorem. Etiam pellentesque aliquet tellus.", DoUntilDate = DateTime.Now});
+                ToDoItemsList.Add(new ToDoItem {ToDoHeader = "To Do Item 3", Description = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Proin nibh augue, suscipit a, scelerisque sed, lacinia in, mi. Cras vel lorem. Etiam pellentesque aliquet tellus.", DoUntilDate = DateTime.Now});                
             }
         }
 
         private List<ToDoItem> toDoItem;
 
-        public List<ToDoItem> ToDoItems
+        public List<ToDoItem> ToDoItemsList
         {
             get { return toDoItem; }
             set
             {
                 toDoItem = value;
-                NotifyOfPropertyChange(() => ToDoItems);
+                NotifyOfPropertyChange(() => ToDoItemsList);
             }
         }
 

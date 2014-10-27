@@ -107,6 +107,7 @@ namespace ToDoDemoApp.ViewModels
            
         public void Save()
         {
+            DalAsync dalAsync = new DalAsync();
             var mainVM = _container.GetInstance<MainPageViewModel>();
 
             if (Parameter == null)
@@ -116,25 +117,27 @@ namespace ToDoDemoApp.ViewModels
                 _toDoItem.DoUntilDate = this.DoUntilDate;
                 _toDoItem.Description = this.Description;
 
-                mainVM.ToDoItems.Add(_toDoItem);           
+                mainVM.ToDoItemsList.Add(_toDoItem);           
 
 
-                Dal.SaveToDoItem(_toDoItem);
+                //Dal.SaveToDoItem(_toDoItem);
+                dalAsync.SaveToDoItemAsync(_toDoItem);
             }
             else
             {
-                var toDoItemToUpdate = mainVM.ToDoItems.FirstOrDefault(a => a.Id == this.Parameter.Id);
+                var toDoItemToUpdate = mainVM.ToDoItemsList.FirstOrDefault(a => a.Id == this.Parameter.Id);
                 if(toDoItemToUpdate != null)
                 {
                     toDoItemToUpdate.ToDoHeader = this.ToDoHeader;
                     toDoItemToUpdate.DoUntilDate = this.DoUntilDate;
                     toDoItemToUpdate.Description = this.Description;
-                    Dal.SaveToDoItem(toDoItemToUpdate);
+                    //Dal.SaveToDoItem(toDoItemToUpdate);
+                    dalAsync.SaveToDoItemAsync(toDoItemToUpdate);
+                    
                 }
 
             }
-            mainVM.ToDoItems = null;
-            mainVM.ToDoItems = Dal.GetAllToDoItems();
+            RefreshToDotList();
 
             _navigationService.GoBack();
         }
@@ -148,14 +151,17 @@ namespace ToDoDemoApp.ViewModels
         {
             var mainVM = _container.GetInstance<MainPageViewModel>();
 
-            var toDoItemToDelete = mainVM.ToDoItems.FirstOrDefault(a => a.Id == this.Parameter.Id);
+            var toDoItemToDelete = mainVM.ToDoItemsList.FirstOrDefault(a => a.Id == this.Parameter.Id);
                 if (toDoItemToDelete != null)
                 {
-                    mainVM.ToDoItems.Remove(toDoItemToDelete);
-                    Dal.DeleteToDoItem(toDoItemToDelete);
+                    mainVM.ToDoItemsList.Remove(toDoItemToDelete);
+                    //Dal.DeleteToDoItem(toDoItemToDelete);
+
+                    DalAsync dalAsync = new DalAsync();
+                    dalAsync.DeleteToDoItemAsync(toDoItemToDelete);
                 }
-                mainVM.ToDoItems = null;
-                mainVM.ToDoItems = Dal.GetAllToDoItems();
+                //RefreshToDotList();
+                RefreshToDotListAsync();
                         
             _navigationService.GoBack();
         }
@@ -169,6 +175,22 @@ namespace ToDoDemoApp.ViewModels
                 else
                     return false;
             }
+        }
+
+        private void RefreshToDotList()
+        {
+            var mainVM = _container.GetInstance<MainPageViewModel>();
+            mainVM.ToDoItemsList = null;
+            mainVM.ToDoItemsList = Dal.GetAllToDoItems();
+        }
+
+        private async void RefreshToDotListAsync()
+        {
+            var mainVM = _container.GetInstance<MainPageViewModel>();
+            mainVM.ToDoItemsList = null;
+
+            DalAsync dalAsync = new DalAsync();
+            mainVM.ToDoItemsList = await dalAsync.GetAllToDoItemsAsync();
         }
     }
 }
