@@ -107,7 +107,7 @@ namespace ToDoDemoApp.ViewModels
            
         public void Save()
         {
-            DalAsync dalAsync = new DalAsync();
+            //DalAsync dalAsync = new DalAsync();
             var mainVM = _container.GetInstance<MainPageViewModel>();
 
             if (Parameter == null)
@@ -120,8 +120,8 @@ namespace ToDoDemoApp.ViewModels
                 mainVM.ToDoItemsList.Add(_toDoItem);           
 
 
-                //Dal.SaveToDoItem(_toDoItem);
-                dalAsync.SaveToDoItemAsync(_toDoItem);
+                Dal.SaveToDoItem(_toDoItem);
+                //dalAsync.SaveToDoItemAsync(_toDoItem);
             }
             else
             {
@@ -131,8 +131,8 @@ namespace ToDoDemoApp.ViewModels
                     toDoItemToUpdate.ToDoHeader = this.ToDoHeader;
                     toDoItemToUpdate.DoUntilDate = this.DoUntilDate;
                     toDoItemToUpdate.Description = this.Description;
-                    //Dal.SaveToDoItem(toDoItemToUpdate);
-                    dalAsync.SaveToDoItemAsync(toDoItemToUpdate);
+                    Dal.SaveToDoItem(toDoItemToUpdate);
+                    //dalAsync.SaveToDoItemAsync(toDoItemToUpdate);
                     
                 }
 
@@ -155,13 +155,13 @@ namespace ToDoDemoApp.ViewModels
                 if (toDoItemToDelete != null)
                 {
                     mainVM.ToDoItemsList.Remove(toDoItemToDelete);
-                    //Dal.DeleteToDoItem(toDoItemToDelete);
+                    Dal.DeleteToDoItem(toDoItemToDelete);
 
-                    DalAsync dalAsync = new DalAsync();
-                    dalAsync.DeleteToDoItemAsync(toDoItemToDelete);
+                    //DalAsync dalAsync = new DalAsync();
+                    //dalAsync.DeleteToDoItemAsync(toDoItemToDelete);
                 }
-                //RefreshToDotList();
-                RefreshToDotListAsync();
+                RefreshToDotList();
+                //RefreshToDotListAsync();
                         
             _navigationService.GoBack();
         }

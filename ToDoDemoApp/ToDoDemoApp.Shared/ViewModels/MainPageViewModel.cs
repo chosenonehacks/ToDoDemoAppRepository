@@ -18,10 +18,10 @@ namespace ToDoDemoApp.ViewModels
         {
             _navigationService = navigationService;
 
-            InitializeDB();
+            //InitializeDB();
             //DalAsync.StartDBOperationsAsync();
-            //Dal.CreateDatabase();
-            //ToDoItems = Dal.GetAllToDoItems();            
+            Dal.CreateDatabase();
+            ToDoItemsList = Dal.GetAllToDoItems();            
             
         }
 
